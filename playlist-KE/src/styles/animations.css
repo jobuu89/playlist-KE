@@ -1,200 +1,70 @@
-/* Custom Animations for Playlist KE */
+/* Animations for Playlist KE */
 
-/* Fade In */
+/* Fade In Animation */
 @keyframes fadeIn {
   from {
     opacity: 0;
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
+    transform: translateY(0);
   }
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.3s ease-in-out;
+  animation: fadeIn 0.5s ease-out forwards;
 }
 
-/* Slide Up */
-@keyframes slideUp {
+/* Slide In Left */
+@keyframes slideInLeft {
   from {
-    transform: translateY(20px);
     opacity: 0;
+    transform: translateX(-30px);
   }
   to {
-    transform: translateY(0);
     opacity: 1;
-  }
-}
-
-.animate-slide-up {
-  animation: slideUp 0.3s ease-out;
-}
-
-/* Slide Down */
-@keyframes slideDown {
-  from {
-    transform: translateY(-20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.animate-slide-down {
-  animation: slideDown 0.3s ease-out;
-}
-
-/* Slide Left */
-@keyframes slideLeft {
-  from {
-    transform: translateX(20px);
-    opacity: 0;
-  }
-  to {
     transform: translateX(0);
-    opacity: 1;
   }
 }
 
-.animate-slide-left {
-  animation: slideLeft 0.3s ease-out;
+.animate-slide-in-left {
+  animation: slideInLeft 0.5s ease-out forwards;
 }
 
-/* Slide Right */
-@keyframes slideRight {
+/* Slide In Right */
+@keyframes slideInRight {
   from {
-    transform: translateX(-20px);
     opacity: 0;
+    transform: translateX(30px);
   }
   to {
-    transform: translateX(0);
     opacity: 1;
+    transform: translateX(0);
   }
 }
 
-.animate-slide-right {
-  animation: slideRight 0.3s ease-out;
+.animate-slide-in-right {
+  animation: slideInRight 0.5s ease-out forwards;
 }
 
 /* Scale In */
 @keyframes scaleIn {
   from {
-    transform: scale(0.95);
     opacity: 0;
+    transform: scale(0.9);
   }
   to {
-    transform: scale(1);
     opacity: 1;
+    transform: scale(1);
   }
 }
 
 .animate-scale-in {
-  animation: scaleIn 0.2s ease-out;
+  animation: scaleIn 0.4s ease-out forwards;
 }
 
-/* Pulse */
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-}
-
-.animate-pulse-slow {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-/* Spin */
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.animate-spin-slow {
-  animation: spin 3s linear infinite;
-}
-
-/* Bounce */
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(-5%);
-    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-  }
-  50% {
-    transform: translateY(0);
-    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-  }
-}
-
-.animate-bounce-slow {
-  animation: bounce 1s infinite;
-}
-
-/* Wave Animation for Audio Visualizer */
-@keyframes wave {
-  0%, 100% {
-    height: 20%;
-  }
-  50% {
-    height: 100%;
-  }
-}
-
-.wave-animation span {
-  animation: wave 1s ease-in-out infinite;
-}
-
-.wave-animation span:nth-child(2) {
-  animation-delay: 0.1s;
-}
-
-.wave-animation span:nth-child(3) {
-  animation-delay: 0.2s;
-}
-
-.wave-animation span:nth-child(4) {
-  animation-delay: 0.3s;
-}
-
-.wave-animation span:nth-child(5) {
-  animation-delay: 0.4s;
-}
-
-/* Playing Indicator */
-@keyframes playing {
-  0%, 100% {
-    transform: scaleY(0.5);
-  }
-  50% {
-    transform: scaleY(1);
-  }
-}
-
-.playing-indicator span {
-  animation: playing 0.8s ease-in-out infinite;
-}
-
-.playing-indicator span:nth-child(1) {
-  animation-delay: 0s;
-}
-
-.playing-indicator span:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.playing-indicator span:nth-child(3) {
-  animation-delay: 0.4s;
-}
-
-/* Shimmer Effect for Loading */
+/* Shimmer Effect for Skeleton Loading */
 @keyframes shimmer {
   0% {
     background-position: -200% 0;
@@ -204,57 +74,231 @@
   }
 }
 
-.shimmer {
+.animate-shimmer {
   background: linear-gradient(
     90deg,
     rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.05) 20%,
+    rgba(255, 255, 255, 0.1) 40%,
+    rgba(255, 255, 255, 0.05) 60%,
     rgba(255, 255, 255, 0) 100%
   );
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }
 
-/* Hover Effects */
+/* Pulse Animation for Featured Content */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(187, 0, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(187, 0, 0, 0.6);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Ring Animation for Artist Cards */
+@keyframes ring-pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(187, 0, 0, 0.7);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(187, 0, 0, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(187, 0, 0, 0);
+  }
+}
+
+.animate-ring-pulse {
+  animation: ring-pulse 2s ease-in-out infinite;
+}
+
+/* Hover Lift Effect */
+@keyframes hover-lift {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
 .hover-lift {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Card Hover Effects */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
-.hover-scale {
-  transition: transform 0.2s ease;
-}
-
-.hover-scale:hover {
-  transform: scale(1.05);
-}
-
-.hover-glow {
-  transition: box-shadow 0.2s ease;
-}
-
-.hover-glow:hover {
-  box-shadow: 0 0 20px rgba(187, 0, 0, 0.5);
-}
-
-/* Transition Classes */
-.transition-all-300 {
+/* Button Hover Effects */
+.btn-hover {
   transition: all 0.3s ease;
 }
 
-.transition-colors-200 {
-  transition: colors 0.2s ease;
+.btn-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(187, 0, 0, 0.4);
 }
 
-.transition-transform-200 {
-  transition: transform 0.2s ease;
+/* Play Button Pulse */
+@keyframes play-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
-.transition-opacity-200 {
-  transition: opacity 0.2s ease;
+.animate-play-pulse {
+  animation: play-pulse 1.5s ease-in-out infinite;
+}
+
+/* Gradient Text Animation */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% auto;
+  animation: gradient-shift 3s ease infinite;
+}
+
+/* Floating Animation for Hero Elements */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Progress Bar Animation */
+@keyframes progress-fill {
+  from {
+    width: 0;
+  }
+}
+
+.animate-progress {
+  animation: progress-fill 0.5s ease-out forwards;
+}
+
+/* Micro-interaction: Icon Bounce */
+@keyframes icon-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.icon-bounce:hover {
+  animation: icon-bounce 0.5s ease;
+}
+
+/* Loading Spinner Ring */
+@keyframes spin-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spin-ring {
+  animation: spin-ring 1s linear infinite;
+}
+
+/* Fade In Stagger Children */
+.stagger-children > * {
+  opacity: 0;
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
+.stagger-children > *:nth-child(6) { animation-delay: 0.6s; }
+
+/* Glassmorphism Effect */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-dark {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Gradient Border */
+.gradient-border {
+  position: relative;
+  background: linear-gradient(var(--tw-gradient-stops));
+  padding: 1px;
+  border-radius: inherit;
+}
+
+.gradient-border > * {
+  background: theme('colors.gray.900');
+  border-radius: inherit;
+}
+
+/* Neon Glow Effects */
+.neon-red {
+  text-shadow: 0 0 5px theme('colors.kenya-red'), 0 0 10px theme('colors.kenya-red'), 0 0 20px theme('colors.kenya-red');
+}
+
+.neon-green {
+  text-shadow: 0 0 5px theme('colors.kenya-green'), 0 0 10px theme('colors.kenya-green'), 0 0 20px theme('colors.kenya-green');
 }
 
