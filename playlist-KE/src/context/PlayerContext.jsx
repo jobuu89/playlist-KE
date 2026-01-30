@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
+import React, { createContext, useContext, useState, useCallback, useMemo } from 'react';
 
 const PlayerContext = createContext();
 
@@ -30,24 +30,24 @@ export const PlayerProvider = ({ children }) => {
     setQueue([]);
   }, []);
 
+  const value = useMemo(() => ({
+    currentSong,
+    isPlaying,
+    progress,
+    volume,
+    queue,
+    play,
+    pause,
+    resume,
+    togglePlayPause,
+    setProgress,
+    setVolume,
+    addToQueue,
+    clearQueue,
+  }), [currentSong, isPlaying, progress, volume, queue, play, pause, resume, togglePlayPause, setProgress, setVolume, addToQueue, clearQueue]);
+
   return (
-    <PlayerContext.Provider
-      value={{
-        currentSong,
-        isPlaying,
-        progress,
-        volume,
-        queue,
-        play,
-        pause,
-        resume,
-        togglePlayPause,
-        setProgress,
-        setVolume,
-        addToQueue,
-        clearQueue,
-      }}
-    >
+    <PlayerContext.Provider value={value}>
       {children}
     </PlayerContext.Provider>
   );
