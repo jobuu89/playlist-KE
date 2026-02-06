@@ -1,10 +1,38 @@
 import React, { useState } from 'react';
-import { Music, Search, Bell, User, Menu, X } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Music, Search, Bell, User, Menu, X, LogOut, Settings } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
 const Header = ({ onMenuToggle, isMenuOpen }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [showUserMenu, setShowUserMenu] = useState(false);
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate('/login');
+    setShowUserMenu(false);
+  };
+
+  // Get user display name or email initial
+  const getUserInitial = () => {
+    if (user?.displayName) {
+      return user.displayName.charAt(0).toUpperCase();
+    }
+    if (user?.email) {
+      return user.email.charAt(0).toUpperCase();
+    }
+    return 'U';
+  };
+
+  const getUserDisplayName = () => {
+    return user?.displayName || user?.email || 'User';
+  };
+
+  const getUserEmail = () => {
+    return user?.email || '';
+  };
 
   return (
     <header className="sticky top-0 z-50 bg-gray-900/80 backdrop-blur-lg border-b border-gray-800">
@@ -74,7 +102,7 @@ const Header = ({ onMenuToggle, isMenuOpen }) => {
               >
                 <div className="h-8 w-8 bg-gradient-to-br from-kenya-red to-purple-600 rounded-full 
                               flex items-center justify-center text-white font-bold">
-                  U
+                  {getUserInitial()}
                 </div>
               </button>
 
@@ -82,20 +110,31 @@ const Header = ({ onMenuToggle, isMenuOpen }) => {
               {showUserMenu && (
                 <div className="absolute right-0 mt-2 w-56 bg-gray-800 rounded-xl shadow-2xl border border-gray-700 overflow-hidden animate-scale-in">
                   <div className="p-4 border-b border-gray-700">
-                    <p className="font-medium text-white">User Name</p>
-                    <p className="text-sm text-gray-400">user@example.com</p>
+                    <p className="font-medium text-white truncate">{getUserDisplayName()}</p>
+                    <p className="text-sm text-gray-400 truncate">{getUserEmail()}</p>
                   </div>
                   <div className="py-2">
-                    <Link to="/profile" className="flex items-center gap-3 px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white transition-colors">
+                    <Link 
+                      to="/profile" 
+                      className="flex items-center gap-3 px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white transition-colors"
+                      onClick={() => setShowUserMenu(false)}
+                    >
                       <User className="h-4 w-4" />
                       <span>Profile</span>
                     </Link>
-                    <Link to="/settings" className="flex items-center gap-3 px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white transition-colors">
+                    <Link 
+                      to="/settings" 
+                      className="flex items-center gap-3 px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white transition-colors"
+                      onClick={() => setShowUserMenu(false)}
+                    >
                       <Settings className="h-4 w-4" />
                       <span>Settings</span>
                     </Link>
                     <hr className="my-2 border-gray-700" />
-                    <button className="flex items-center gap-3 px-4 py-2 text-red-400 hover:bg-gray-700 w-full transition-colors">
+                    <button 
+                      onClick={handleLogout}
+                      className="flex items-center gap-3 px-4 py-2 text-red-400 hover:bg-gray-700 w-full transition-colors"
+                    >
                       <LogOut className="h-4 w-4" />
                       <span>Sign Out</span>
                     </button>
